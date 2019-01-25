@@ -33,10 +33,13 @@ class NetworkConnectionTests(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+    # 网络连接的类型
     def test_get_network_connection(self):
         nc = self.driver.network_connection
+        # 种返回值,参考connectiontype.py文件
         self.assertIsInstance(nc, int)
 
+    # 设置网络连接方式
     def test_set_network_connection(self):
         nc = self.driver.set_network_connection(ConnectionType.DATA_ONLY)
         self.assertIsInstance(nc, int)

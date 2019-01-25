@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import unittest
+from time import sleep
 
 from appium import webdriver
 import desired_capabilities
@@ -26,16 +27,22 @@ class FindByAccessibilityIDTests(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+    # content-desc属性 -> 元素
     def test_find_single_element(self):
         self.driver.find_element_by_android_uiautomator('new UiSelector().text("Accessibility")').click()
-        self.driver.find_element_by_android_uiautomator('new UiSelector().text("Accessibility Node Querying")').click()
-        el = self.driver.find_element_by_accessibility_id('Task Take out Trash')
+        el = self.driver.find_element_by_accessibility_id('Accessibility Node Querying')  # 即content-desc属性
+        sleep(1)
+        el.click()
+        sleep(1)
         self.assertIsNotNone(el)
 
+    # content-desc属性 -> 多个元素
     def test_find_multiple_elements(self):
         els = self.driver.find_elements_by_accessibility_id('Accessibility')
+        print(len(els))
         self.assertIsInstance(els, list)
 
+    # 元素中找content-desc元素
     def test_element_find_single_element(self):
         self.driver.find_element_by_android_uiautomator('new UiSelector().text("Accessibility")').click()
         self.driver.find_element_by_android_uiautomator('new UiSelector().text("Accessibility Node Querying")').click()
@@ -44,6 +51,7 @@ class FindByAccessibilityIDTests(unittest.TestCase):
         sub_el = el.find_element_by_accessibility_id('Task Take out Trash')
         self.assertIsNotNone(sub_el)
 
+    # 元素中找content - desc多个元素
     def test_element_find_multiple_elements(self):
         el = self.driver.find_element_by_class_name('android.widget.ListView')
 

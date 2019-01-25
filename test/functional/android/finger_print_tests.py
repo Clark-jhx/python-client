@@ -27,6 +27,7 @@ class FingerPrintTests(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+    # 只能在emulators虚拟机上用
     def test_finger_print(self):
         result = self.driver.finger_print(1)
         self.assertEqual(None, result)

@@ -28,6 +28,7 @@ class PushFileTests(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+    # push pull 文件
     def test_push_file(self):
         test_files = ['test_image.jpg', 'test_file.txt']
         for file_name in test_files:
